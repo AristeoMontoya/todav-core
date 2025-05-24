@@ -6,9 +6,9 @@ package todav.core;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LibraryTest {
+class TodavCoreTest {
     @Test void someLibraryMethodReturnsTrue() {
-        Library classUnderTest = new Library();
+        TodavCore classUnderTest = new TodavCore();
         assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
     }
 }

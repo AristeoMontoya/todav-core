@@ -3,7 +3,11 @@
  */
 package todav.core;
 
-public class Library {
+public class TodavCore {
+    public void initializeDefault() {
+
+    }
+
     public boolean someLibraryMethod() {
         return true;
     }
