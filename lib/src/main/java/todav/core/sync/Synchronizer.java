@@ -1,4 +1,4 @@
-package todav.core.dav;
+package todav.core.sync;
 
 public interface Synchronizer {
 }
