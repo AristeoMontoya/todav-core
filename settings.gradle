@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'todav-core'
-include('lib')
+include('core')

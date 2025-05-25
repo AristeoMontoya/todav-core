@@ -4,11 +4,6 @@ plugins {
     id 'maven-publish'
 }
 
-allprojects {
-    group "org.todav"
-    version "0.1"
-}
-
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -35,8 +30,14 @@ tasks.named('test') {
 
 publishing {
     publications {
-        myLib(MavenPublication) {
-            from components.java
+        mavenJava(MavenPublication) {
+            from components['java']
+            artifactId = "core"
+            group = "org.todav"
+            version = "0.1"
         }
     }
 }
+
+publishToMavenLocal.dependsOn build
+publish.dependsOn build
