@@ -7,7 +7,7 @@ public enum Platform {
     // Might add support for windows in the future.
     ANDROID("android"),
     LINUX("linux"),
-    UNKNOWN("");
+    UNKNOWN("unknown");
 
     public final String label;
 
@@ -15,12 +15,12 @@ public enum Platform {
         this.label = label;
     }
 
-    public static Optional<Platform> getPlatform(String label) {
+    public static Platform getPlatform(String label) {
         for (Platform platform : values()) {
             if (platform.label.equals(label)) {
-                return Optional.of(platform);
+                return platform;
             }
         }
-        return Optional.empty();
+        return UNKNOWN;
     }
 }

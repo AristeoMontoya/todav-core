@@ -7,10 +7,6 @@ public class PlatformDetector {
 
     public static Platform detectPlatform() {
         String osName = System.getProperty("os.name").toLowerCase();
-        /* TODO: It really doesn't make sense to use optional here if
-         *  I'll be returning null anyway. Need to revisit this.
-         *  Yay, first piece of tech debt.
-         */
-        return Platform.getPlatform(osName).orElse(null);
+        return Platform.getPlatform(osName);
     }
 }
