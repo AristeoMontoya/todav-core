@@ -1,5 +1,4 @@
 package todav.core.sync;
 
-public class SyncService {
-
+public interface SyncService {
 }
