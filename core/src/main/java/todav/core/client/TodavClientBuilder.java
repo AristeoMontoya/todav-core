@@ -1,5 +1,6 @@
 package todav.core.client;
 
+import todav.core.client.credentials.CredentialProvider;
 import todav.core.configuration.ConfigurationManager;
 import todav.core.configuration.Platform;
 import todav.core.configuration.PlatformDetector;
@@ -10,6 +11,7 @@ public class TodavClientBuilder {
     private ConfigurationManager configManager;
     private EventManager eventManager;
     private SyncService syncService;
+    private CredentialProvider credentialProvider;
 
     public TodavClientBuilder withConfigManager(ConfigurationManager configManager) {
         this.configManager = configManager;
@@ -26,6 +28,11 @@ public class TodavClientBuilder {
         return this;
     }
 
+    public TodavClientBuilder withCredentialProvider(CredentialProvider credentialProvider) {
+        this.credentialProvider = credentialProvider;
+        return this;
+    }
+
     public TodavClientBuilder withDetectedPlatformDefaults() {
         Platform platform = PlatformDetector.detectPlatform();
         return this;
@@ -35,7 +42,8 @@ public class TodavClientBuilder {
         return new TodavClient(
                 this.configManager,
                 this.eventManager,
-                this.syncService
+                this.syncService,
+                this.credentialProvider
         );
     }
 }

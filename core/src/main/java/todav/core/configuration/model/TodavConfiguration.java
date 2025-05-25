@@ -1,10 +1,14 @@
 package todav.core.configuration.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import todav.core.client.credentials.CaldavAccount;
 import todav.core.configuration.Platform;
 
 public class TodavConfiguration {
+    private List<CaldavAccount> accounts;
+
     private Map<String, Object> global;
     private Map<String, Object> desktop;
     private Map<String, Object> android;
@@ -19,6 +23,10 @@ public class TodavConfiguration {
 
     public void setAndroid(Map<String, Object> android) {
         this.android = android;
+    }
+
+    public List<CaldavAccount> getAccounts() {
+        return this.getAccounts();
     }
 
     public Map<String, Object> getFlatConfigurationMap(Platform platform) {
@@ -40,7 +48,7 @@ public class TodavConfiguration {
                     entry.getKey().toString() :
                     String.format("%s.%s", prefix, entry.getKey());
             Object value = entry.getValue();
-            if (value instanceof Map<?,?>) {
+            if (value instanceof Map<?, ?>) {
                 return flattenMap(currentPrefix, (Map<String, Object>) value, flattened);
             } else {
                 flattened.put(currentPrefix, entry.getValue());

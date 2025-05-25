@@ -4,11 +4,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
+import todav.core.client.credentials.CaldavAccount;
 import todav.core.configuration.model.TodavConfiguration;
 
 public class ConfigurationManager {
@@ -32,6 +34,10 @@ public class ConfigurationManager {
             this.todavConfiguration = yaml.load(fileStream);
             this.configMap = todavConfiguration.getFlatConfigurationMap(this.platform);
         }
+    }
+
+    public List<CaldavAccount> getAccounts() {
+        return todavConfiguration.getAccounts();
     }
 
     public boolean getBoolean(String configuration, boolean defaultValue) {
