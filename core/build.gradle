@@ -19,7 +19,7 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:31.1-jre'
-
+    // Configuration parsing
     implementation 'org.yaml:snakeyaml:2.4'
 }
 
