@@ -1,20 +1,13 @@
 package todav.core.configuration.model;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import todav.core.configuration.Platform;
-import todav.core.configuration.PlatformDetector;
 
 public class TodavConfiguration {
     private Map<String, Object> global;
     private Map<String, Object> desktop;
     private Map<String, Object> android;
-
-    public Object getConfigValue(String key) {
-        Platform current = PlatformDetector.detectPlatform();
-        Map<String, Object> platformConfig = current == Platform.ANDROID ? this.android : this.desktop;
-        return Optional.ofNullable(platformConfig.get(key)).orElse(this.global.get(key));
-    }
 
     public void setGlobal(Map<String, Object> global) {
         this.global = global;
@@ -26,5 +19,33 @@ public class TodavConfiguration {
 
     public void setAndroid(Map<String, Object> android) {
         this.android = android;
+    }
+
+    public Map<String, Object> getFlatConfigurationMap(Platform platform) {
+        Map<String, Object> platformConfig = platform == Platform.ANDROID ?
+                this.android :
+                this.desktop;
+
+        Map<String, Object> flatMap = flattenMap("", this.global, new HashMap<>());
+        if (platformConfig != null) {
+            flatMap.putAll(platformConfig);
+        }
+
+        return flatMap;
+    }
+
+    private Map<String, Object> flattenMap(String prefix, Map<String, Object> source, Map<String, Object> flattened) {
+        for (Map.Entry entry : source.entrySet()) {
+            String currentPrefix = prefix.isEmpty() ?
+                    entry.getKey().toString() :
+                    String.format("%s.%s", prefix, entry.getKey());
+            Object value = entry.getValue();
+            if (value instanceof Map<?,?>) {
+                return flattenMap(currentPrefix, (Map<String, Object>) value, flattened);
+            } else {
+                flattened.put(currentPrefix, entry.getValue());
+            }
+        }
+        return flattened;
     }
 }
