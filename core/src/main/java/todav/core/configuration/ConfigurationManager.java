@@ -12,15 +12,12 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import todav.core.configuration.model.TodavConfiguration;
 
 public class ConfigurationManager {
-    private Yaml yaml;
     private TodavConfiguration todavConfiguration;
     private Map<String, Object> configMap;
-
     private Platform platform;
 
     public ConfigurationManager(Path configLocation) {
         this.platform = PlatformDetector.detectPlatform();
-        this.yaml = new Yaml(new Constructor(TodavConfiguration.class, new LoaderOptions()));
         try {
             loadConfigFile(configLocation);
         } catch (FileNotFoundException e) {
@@ -31,14 +28,23 @@ public class ConfigurationManager {
     private void loadConfigFile(Path configLocation) throws FileNotFoundException {
         if (configLocation.toFile().exists()) {
             InputStream fileStream = new FileInputStream(configLocation.toFile());
+            Yaml yaml = new Yaml(new Constructor(TodavConfiguration.class, new LoaderOptions()));
             this.todavConfiguration = yaml.load(fileStream);
             this.configMap = todavConfiguration.getFlatConfigurationMap(this.platform);
         }
     }
 
-    public boolean getAsBoolean(String configuration, boolean defaultValue) {
+    public boolean getBoolean(String configuration, boolean defaultValue) {
        return Optional.ofNullable(this.configMap.get(configuration))
                .map(val -> Boolean.getBoolean((String) val))
                .orElse(defaultValue);
+    }
+
+    public String getString(String configuration, String defaultValue) {
+        return String.valueOf(configMap.getOrDefault(configuration, defaultValue));
+    }
+
+    public int getInt(String configuration, int defaultValue) {
+        return (int) configMap.getOrDefault(configuration, defaultValue);
     }
 }
