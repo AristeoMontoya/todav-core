@@ -27,7 +27,7 @@ public class TodavClientBuilder {
     }
 
     public TodavClientBuilder withDetectedPlatformDefaults() {
-        Platform platform = PlatformDetector.detectorPlatform();
+        Platform platform = PlatformDetector.detectPlatform();
         return this;
     }
 

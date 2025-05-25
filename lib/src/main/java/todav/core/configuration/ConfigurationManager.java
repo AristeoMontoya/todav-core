@@ -1,6 +1,13 @@
 package todav.core.configuration;
 
+import java.nio.file.Path;
+
 public class ConfigurationManager {
-    public ConfigurationManager(String some, String other, String thing, String idk) {
+    private Path configLocation;
+    private ConfigurationWatcher watcher;
+
+    public ConfigurationManager(Path configLocation, ConfigurationWatcher watcher) {
+        this.configLocation = configLocation;
+        this.watcher = watcher;
     }
 }
