@@ -19,8 +19,9 @@ public class PlatformConfigLocator implements ConfigurationLocator {
     }
 
     private Path getLinuxPath() {
+        String configPath = ".config/todav/todav.yaml";
         return Optional.ofNullable(System.getProperty("user.name"))
-                .map(user -> Path.of(String.format("/home/%s/.config", user)))
-                .orElseGet(() -> Path.of("~/.config"));
+                .map(user -> Path.of(String.format("/home/%s/%s", user, configPath)))
+                .orElseGet(() -> Path.of(String.format("~/%s", configPath)));
     }
 }
