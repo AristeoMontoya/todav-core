@@ -194,7 +194,7 @@
 <ref refid="110e6715-3907-11f0-87a4-57b6e4538b87"/>
 </class_>
 <name>
-<val>syncService</val>
+<val>accountSyncer</val>
 </name>
 </UML:Property>
 <UML:Class id="f0a92213-3908-11f0-962d-57b6e4538b87">

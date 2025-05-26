@@ -1,16 +1,16 @@
 package todav.core.client;
 
+import todav.core.caldav.AccountSyncer;
 import todav.core.client.credentials.CredentialProvider;
 import todav.core.configuration.ConfigurationManager;
 import todav.core.configuration.Platform;
 import todav.core.configuration.PlatformDetector;
-import todav.core.event.EventManager;
-import todav.core.sync.SyncService;
+import todav.core.caldav.event.EventManager;
 
 public class TodavClientBuilder {
     private ConfigurationManager configManager;
     private EventManager eventManager;
-    private SyncService syncService;
+    private AccountSyncer accountSyncer;
     private CredentialProvider credentialProvider;
 
     public TodavClientBuilder withConfigManager(ConfigurationManager configManager) {
@@ -23,8 +23,8 @@ public class TodavClientBuilder {
         return this;
     }
 
-    public TodavClientBuilder withSyncService(SyncService syncService) {
-        this.syncService = syncService;
+    public TodavClientBuilder withSyncService(AccountSyncer accountSyncer) {
+        this.accountSyncer = accountSyncer;
         return this;
     }
 
@@ -42,7 +42,7 @@ public class TodavClientBuilder {
         return new TodavClient(
                 this.configManager,
                 this.eventManager,
-                this.syncService,
+                this.accountSyncer,
                 this.credentialProvider
         );
     }

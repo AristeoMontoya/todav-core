@@ -25,8 +25,12 @@ public class TodavConfiguration {
         this.android = android;
     }
 
+    public void setAccounts(List<CaldavAccount> accounts) {
+        this.accounts = accounts;
+    }
+
     public List<CaldavAccount> getAccounts() {
-        return this.getAccounts();
+        return this.accounts;
     }
 
     public Map<String, Object> getFlatConfigurationMap(Platform platform) {
